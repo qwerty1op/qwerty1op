@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Barcode Scanner</title>
+
+</head>
+<body>
+  <div id="result"></div>
+  <div class="scan"></div>
+  <script src="quagga.min.js"></script>
+
+  <script>
+    Quagga.init({
+      inputStream : {
+        name : "Live",
+        type : "LiveStream",
+        target: document.querySelector('.scan')
+      },
+      decoder : {
+        readers : ["ean_reader"]
+      }
+    }, function(err) {
+      if (err) {
+        console.log(err);
+        return
+      }
+      console.log("Initialization finished. Ready to start");
+      Quagga.start();
+    });
+    Quagga.onDetected( function (data){
+        document.querySelector('#result').innerHTML = data.codeResult.code;
+        Quagga.stop()
+    })
+
+  </script>
+</body>
+</html>
