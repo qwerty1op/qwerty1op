@@ -35,11 +35,11 @@
         }
       );
       Quagga.onDetected(function (data) {
+        document.querySelector("#result").innerHTML = data.codeResult.code;
         document.querySelector("#result").innerHTML = "Halal";
-        document.getElementsByClassName("milkimage") = {
-            display: "block"
-        }
         Quagga.stop();
+        document.querySelector(".scan").style = 'background-image: url(\'assets/milk.jpg\')';
+
       });
 
       arr = {
