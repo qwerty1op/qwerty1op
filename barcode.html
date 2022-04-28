@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Barcode Scanner</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="result" class="result">
+      <img src="assets/milk.jpg" alt="" class="milkimage" id="milkimage" />
+    </div>
+
+    <div class="scan"></div>
+    <script src="quagga.min.js"></script>
+
+    <script>
+      Quagga.init(
+        {
+          inputStream: {
+            name: "Live",
+            type: "LiveStream",
+            target: document.querySelector(".scan"),
+          },
+          decoder: {
+            readers: ["ean_reader"],
+          },
+        },
+        function (err) {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          console.log("Initialization finished. Ready to start");
+          Quagga.start();
+        }
+      );
+      Quagga.onDetected(function (data) {
+        document.querySelector("#result").innerHTML = "Halal";
+        document.getElementsByClassName("milkimage") = {
+            display: "block"
+        }
+        Quagga.stop();
+      });
+
+      arr = {
+        21435: "halal",
+      };
+    </script>
+  </body>
+</html>
